@@ -114,15 +114,42 @@ const Filler = styled.div`
   }
 `;
 
-const NavLink = styled.a`
+const Bold = styled.div`
+  font-weight: bold;
+`;
+
+const NavLink = ({ children, ...otherProps }) => {
+  return (
+    <StyledLink {...otherProps}>
+      <LinkWrapper>
+        <div>{children}</div>
+        <Bold>{children}</Bold>
+      </LinkWrapper>
+    </StyledLink>
+  );
+};
+
+const StyledLink = styled.a`
   font-size: 1.125rem;
   text-transform: uppercase;
   text-decoration: none;
   color: var(--color-gray-900);
   font-weight: ${WEIGHTS.medium};
+  overflow: hidden;
+  height: 1.5rem;
 
   &:first-of-type {
     color: var(--color-secondary);
+  }
+`;
+
+const LinkWrapper = styled.div`
+  transition: transform 300ms;
+
+  @media (prefers-reduced-motion: no-preference) {
+    ${StyledLink}:hover & {
+      transform: translateY(-50%);
+    }
   }
 `;
 
